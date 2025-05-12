@@ -22,7 +22,7 @@ const mockPhone: Phone = {
 describe('PhoneCard', () => {
   it('renders phone details correctly', () => {
     render(
-      <BrowserRouter>
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <PhoneCard phone={mockPhone} />
       </BrowserRouter>
     );
@@ -36,7 +36,7 @@ describe('PhoneCard', () => {
 
   it('shows 5G icon when phone has 5G', () => {
     render(
-      <BrowserRouter>
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <PhoneCard phone={mockPhone} />
       </BrowserRouter>
     );
@@ -47,7 +47,7 @@ describe('PhoneCard', () => {
   it('does not show 5G icon when phone does not have 5G', () => {
     const nonFiveGPhone = { ...mockPhone, isFiveG: false };
     render(
-      <BrowserRouter>
+      <BrowserRouter future={{ v7_startTransition: true, v7_relativeSplatPath: true }}>
         <PhoneCard phone={nonFiveGPhone} />
       </BrowserRouter>
     );

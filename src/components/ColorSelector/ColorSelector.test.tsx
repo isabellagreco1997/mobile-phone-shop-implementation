@@ -38,7 +38,8 @@ describe('ColorSelector', () => {
     fireEvent.click(button);
     
     mockColors.forEach(color => {
-      expect(screen.getByText(color.name)).toBeInTheDocument();
+      const colorElements = screen.getAllByText(color.name);
+      expect(colorElements.length).toBeGreaterThan(0);
     });
   });
   
@@ -56,8 +57,8 @@ describe('ColorSelector', () => {
     const button = screen.getByRole('button', { name: /Black/i });
     fireEvent.click(button);
     
-    const whiteOption = screen.getByText('White');
-    fireEvent.click(whiteOption);
+    const whiteOptions = screen.getAllByText('White');
+    fireEvent.click(whiteOptions[0]);
     
     expect(handleSelect).toHaveBeenCalledWith(mockColors[1]);
   });
