@@ -11,6 +11,7 @@ import { Truck } from 'lucide-react';
 import FiveGIcon from '../components/FiveGIcon';
 import { getPhoneByName } from '../services/phoneService';
 import { isAppError } from '../utils/errorHandler';
+import { getPhoneImagePath } from '../utils/imageUtils';
 
 const PhoneDetailsPage: React.FC = () => {
   const { id } = useParams<{ id: string }>();
@@ -30,11 +31,6 @@ const PhoneDetailsPage: React.FC = () => {
       setError(null);
       const normalizedId = id?.replace(/-/g, ' ');
       if (!normalizedId) throw new Error('Invalid phone ID');
-
-      // Simulate an API error occasionally
-      // if (Math.random() < 0.2) {
-      //   throw new Error('Failed to fetch phone details. Please try again.');
-      // }
 
       const phoneData = await getPhoneByName(normalizedId);
       if (!phoneData) {
@@ -69,11 +65,6 @@ const PhoneDetailsPage: React.FC = () => {
     try {
       setBasketError(null);
       if (!phone || !selectedColor || !selectedCapacity || phone.stock === 0) return;
-
-      // Simulate a basket error occasionally
-      if (Math.random() < 0.2) {
-        throw new Error('Failed to update basket. Please try again.');
-      }
 
       const basketItem = {
         id: phone.deviceName,
@@ -113,12 +104,6 @@ const PhoneDetailsPage: React.FC = () => {
     return null;
   }
 
-  const getImagePath = (deviceName: string): string => {
-    // Remove any special characters and convert to lowercase
-    const formattedName = deviceName.toLowerCase().replace(/[^a-z0-9]/g, '-');
-    return `/images/${formattedName}.png`;
-  };
-
   return (
     <div className="bg-gray-100 min-h-screen">
       <div className="container mx-auto px-4 py-8">
@@ -133,7 +118,7 @@ const PhoneDetailsPage: React.FC = () => {
               
               <div className="bg-white p-8 rounded-lg flex justify-center items-center mb-6">
                 <img 
-                  src={getImagePath(phone.deviceName)}
+                  src={getPhoneImagePath(phone.deviceName)}
                   alt={`${phone.brand} ${phone.deviceName} in ${selectedColor.name}`} 
                   className="max-w-full h-auto"
                 />

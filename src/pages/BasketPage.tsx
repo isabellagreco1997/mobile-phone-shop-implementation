@@ -4,15 +4,7 @@ import { useBasket } from '../context/BasketContext';
 import { ShoppingBasket, Plus, ChevronDown, Info, Trash2 } from 'lucide-react';
 import CheckoutModal from '../components/CheckoutModal';
 import { supabase } from '../lib/supabase';
-
-const getImagePath = (deviceName: string | undefined): string => {
-  if (!deviceName || typeof deviceName !== 'string') {
-    console.error('Invalid device name:', deviceName);
-    return '/images/placeholder.png'; // Fallback to a placeholder image
-  }
-  const formattedName = deviceName.toLowerCase().replace(/[^a-z0-9]/g, '-');
-  return `/images/${formattedName}.png`;
-};
+import { getPhoneImagePath } from '../utils/imageUtils';
 
 const BasketPage: React.FC = () => {
   const { items, removeFromBasket } = useBasket();
@@ -146,7 +138,7 @@ const BasketPage: React.FC = () => {
                 <div className="flex justify-between">
                   <div className="flex gap-6">
                     <img 
-                      src={getImagePath(item.id)}
+                      src={getPhoneImagePath(item.id)}
                       alt={item.id}
                       className="w-24 h-24 object-contain"
                     />
@@ -200,5 +192,3 @@ const BasketPage: React.FC = () => {
     </div>
   );
 };
-
-export default BasketPage;

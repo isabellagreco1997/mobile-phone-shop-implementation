@@ -2,14 +2,9 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { PhoneCardProps } from './PhoneCard.types';
 import FiveGIcon from '../FiveGIcon';
+import { getPhoneImagePath } from '../../utils/imageUtils';
 
 const PhoneCard: React.FC<PhoneCardProps> = ({ phone }) => {
-  const getImagePath = (deviceName: string): string => {
-    // Remove any special characters and convert to lowercase
-    const formattedName = deviceName.toLowerCase().replace(/[^a-z0-9]/g, '-');
-    return `/images/${formattedName}.png`;
-  };
-
   return (
     <div className="w-full border border-gray-200 rounded-lg overflow-hidden bg-white">
       <div className="bg-teal-700 text-white py-2 px-4">
@@ -21,7 +16,7 @@ const PhoneCard: React.FC<PhoneCardProps> = ({ phone }) => {
           {/* Phone Image */}
           <div className="w-1/2 pr-6">
             <img 
-              src={getImagePath(phone.deviceName)}
+              src={getPhoneImagePath(phone.deviceName)}
               alt={`${phone.brand} ${phone.deviceName}`}
               className="h-64 object-contain"
             />
