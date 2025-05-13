@@ -70,8 +70,7 @@ const PhoneDetailsPage: React.FC = () => {
       setBasketError(null);
       if (!phone || !selectedColor || !selectedCapacity || phone.stock === 0) return;
 
-      // Simulate a basket error
-      // change that to 0 to never get error or 0.1
+      // Simulate a basket error occasionally
       if (Math.random() < 0.2) {
         throw new Error('Failed to update basket. Please try again.');
       }
@@ -115,7 +114,9 @@ const PhoneDetailsPage: React.FC = () => {
   }
 
   const getImagePath = (deviceName: string): string => {
-    return `/images/${deviceName.toLowerCase().replace(/\s+/g, '-')}.png`;
+    // Remove any special characters and convert to lowercase
+    const formattedName = deviceName.toLowerCase().replace(/[^a-z0-9]/g, '-');
+    return `/images/${formattedName}.png`;
   };
 
   return (

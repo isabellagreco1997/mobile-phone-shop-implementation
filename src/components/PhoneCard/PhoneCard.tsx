@@ -5,7 +5,9 @@ import FiveGIcon from '../FiveGIcon';
 
 const PhoneCard: React.FC<PhoneCardProps> = ({ phone }) => {
   const getImagePath = (deviceName: string): string => {
-    return `/images/${deviceName.toLowerCase().replace(/\s+/g, '-')}.png`;
+    // Remove any special characters and convert to lowercase
+    const formattedName = deviceName.toLowerCase().replace(/[^a-z0-9]/g, '-');
+    return `/images/${formattedName}.png`;
   };
 
   return (
