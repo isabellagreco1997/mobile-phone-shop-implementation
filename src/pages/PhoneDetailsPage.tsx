@@ -32,9 +32,9 @@ const PhoneDetailsPage: React.FC = () => {
       if (!normalizedId) throw new Error('Invalid phone ID');
 
       // Simulate an API error occasionally
-      if (Math.random() < 0.2) {
-        throw new Error('Failed to fetch phone details. Please try again.');
-      }
+      // if (Math.random() < 0.2) {
+      //   throw new Error('Failed to fetch phone details. Please try again.');
+      // }
 
       const phoneData = await getPhoneByName(normalizedId);
       if (!phoneData) {

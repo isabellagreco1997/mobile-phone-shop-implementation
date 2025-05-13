@@ -56,10 +56,10 @@ export const BasketProvider: React.FC<{ children: React.ReactNode }> = ({ childr
       if (fetchError) throw fetchError;
 
       const formattedItems = data?.map(item => ({
-        id: item.phones.device_name,
+        id: item.phones[0]?.device_name,
         colorName: item.color_name,
         capacitySize: item.capacity_size,
-        price: item.phones.phone_capacities.find(
+        price: item.phones[0]?.phone_capacities.find(
           (c: any) => c.size === item.capacity_size
         )?.price || 0
       })) || [];

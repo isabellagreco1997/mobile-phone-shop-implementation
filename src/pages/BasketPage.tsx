@@ -5,6 +5,15 @@ import { ShoppingBasket, Plus, ChevronDown, Info, Trash2 } from 'lucide-react';
 import CheckoutModal from '../components/CheckoutModal';
 import { supabase } from '../lib/supabase';
 
+const getImagePath = (deviceName: string | undefined): string => {
+  if (!deviceName || typeof deviceName !== 'string') {
+    console.error('Invalid device name:', deviceName);
+    return '/images/placeholder.png'; // Fallback to a placeholder image
+  }
+  const formattedName = deviceName.toLowerCase().replace(/[^a-z0-9]/g, '-');
+  return `/images/${formattedName}.png`;
+};
+
 const BasketPage: React.FC = () => {
   const { items, removeFromBasket } = useBasket();
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -130,13 +139,14 @@ const BasketPage: React.FC = () => {
                 </button>
               </div>
             </div>
-            
+            {/* Debugging output */}
+            <>{console.log(items)}</>
             {items.map((item) => (
               <div key={item.id} className="p-6 border-b">
                 <div className="flex justify-between">
                   <div className="flex gap-6">
                     <img 
-                      src={`/images/${item.id.toLowerCase().replace(/\s+/g, '-')}.png`}
+                      src={getImagePath(item.id)}
                       alt={item.id}
                       className="w-24 h-24 object-contain"
                     />
