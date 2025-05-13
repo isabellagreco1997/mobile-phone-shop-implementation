@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useBasket } from '../context/BasketContext';
 import { ShoppingBasket, Plus, ChevronDown, Info, Trash2 } from 'lucide-react';
@@ -11,10 +11,11 @@ const BasketPage: React.FC = () => {
   const [isProcessing, setIsProcessing] = useState(false);
   const navigate = useNavigate();
   
-  const totalUpfront = 40;
-  const monthlyBase = 37;
-  const firstYearIncrease = 38.80;
-  const secondYearIncrease = 40.60;
+  // Calculate totals
+  const totalUpfront = items.reduce((sum, item) => sum + item.price, 0);
+  const monthlyBase = 37; // Base monthly fee
+  const firstYearIncrease = (monthlyBase * 1.05).toFixed(2); // 5% increase
+  const secondYearIncrease = (monthlyBase * 1.10).toFixed(2); // 10% increase
 
   const handleCheckout = async () => {
     try {
