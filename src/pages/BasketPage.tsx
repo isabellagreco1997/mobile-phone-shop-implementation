@@ -192,3 +192,5 @@ const BasketPage: React.FC = () => {
     </div>
   );
 };
+
+export default BasketPage
